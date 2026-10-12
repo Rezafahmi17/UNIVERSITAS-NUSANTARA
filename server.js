@@ -14,11 +14,6 @@ if (!fs.existsSync(UPLOAD_DIR)) {
   fs.mkdirSync(UPLOAD_DIR, { recursive: true });
 }
 
-// Buat berkas sampel contoh tugas di uploads
-const samplePdfPath = path.join(UPLOAD_DIR, 'sample_report_dimas.pdf');
-if (!fs.existsSync(samplePdfPath)) {
-  fs.writeFileSync(samplePdfPath, '%PDF-1.4 Contoh Laporan Praktikum Keamanan Sistem Informasi - Dimas Pratama');
-}
 
 // Middleware
 app.use(cors());

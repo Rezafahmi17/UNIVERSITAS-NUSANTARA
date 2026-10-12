@@ -193,7 +193,8 @@ function renderGradesTab(grades) {
             </tr>
           </thead>
           <tbody>
-            ${grades.map(g => `
+            ${grades.length === 0 ? '<tr><td colspan="7" style="text-align:center;color:#94a3b8;padding:1.5rem;">Belum ada data nilai / KHS yang diinput oleh dosen.</td></tr>' :
+              grades.map(g => `
               <tr>
                 <td>${g.courseCode}</td>
                 <td><strong>${g.courseName}</strong></td>
@@ -399,7 +400,8 @@ function renderDosenGrades(students, grades) {
             </tr>
           </thead>
           <tbody>
-            ${grades.map(g => `
+            ${grades.length === 0 ? '<tr><td colspan="5" style="text-align:center;color:#94a3b8;padding:1.5rem;">Belum ada data nilai mahasiswa yang diinput.</td></tr>' :
+              grades.map(g => `
               <tr>
                 <td><strong>${g.studentName}</strong> (${g.nim})</td>
                 <td>${g.courseName}</td>
