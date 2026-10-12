@@ -1,7 +1,7 @@
 {
   "name": "portal-kampus-keamanan",
   "version": "1.0.0",
-  "description": "Portal Kampus Fiktif untuk Praktikum Keamanan Sistem Informasi",
+  "description": "Portal Kampus Praktikum Keamanan Sistem Informasi",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",

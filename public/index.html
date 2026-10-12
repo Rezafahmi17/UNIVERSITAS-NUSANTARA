@@ -1,24 +1,29 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Portal Akademik Cyber Campus - Praktikum Keamanan Sistem Informasi</title>
-  <meta name="description" content="Portal Kampus Fiktif untuk Praktikum Keamanan Sistem Informasi dengan modul audit kerentanan Nuclei.">
+  <meta name="description"
+    content="Portal Kampus Fiktif untuk Praktikum Keamanan Sistem Informasi dengan modul audit kerentanan Nuclei.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap"
+    rel="stylesheet">
   <link rel="stylesheet" href="/css/style.css">
 </head>
+
 <body>
 
   <!-- NAVBAR -->
   <nav class="navbar">
     <a href="/" class="brand">
-      <div class="brand-icon">🎓</div>
+      <div class="brand-icon">UN</div>
       <div class="brand-text">
         <h1>UNIVERSITAS NUSANTARA</h1>
-        <span>Cyber Academic Portal • KSI Lab</span>
+        <span>Cyber Academic Portal - KSI Lab</span>
       </div>
     </a>
 
@@ -28,20 +33,20 @@
 
       <!-- Tombol Informasi Praktikum & Nuclei Guide -->
       <button class="btn btn-secondary btn-sm" id="btn-open-security" title="Petunjuk Audit Keamanan & Scanning Nuclei">
-        🛡️ Info Kerentanan
+        Info Kerentanan
       </button>
 
       <!-- Aksi Guest (Belum Login) -->
       <div id="nav-guest-actions" style="display: flex; gap: 8px;">
         <button class="btn btn-primary btn-sm" id="btn-open-login">
-          🔑 Masuk Portal
+          Masuk Portal
         </button>
       </div>
 
       <!-- Aksi Pengguna Login -->
       <div id="nav-user-actions" style="display: none; align-items: center; gap: 8px;">
         <button class="btn btn-danger btn-sm" id="btn-logout">
-          Keluar 🚪
+          Keluar
         </button>
       </div>
     </div>
@@ -56,7 +61,7 @@
   <div class="modal-overlay" id="modal-login">
     <div class="modal-content">
       <div class="modal-header">
-        <div class="modal-title">🔐 Masuk ke Portal Kampus</div>
+        <div class="modal-title">Masuk ke Portal Kampus</div>
         <button class="modal-close">&times;</button>
       </div>
       <div class="modal-body">
@@ -67,12 +72,14 @@
         <form id="form-login">
           <div class="form-group">
             <label class="form-label" for="login-username">Nama Pengguna (Username)</label>
-            <input type="text" class="form-control" id="login-username" placeholder="Contoh: mhs_dimas" required autocomplete="username">
+            <input type="text" class="form-control" id="login-username" placeholder="Contoh: mhs_dimas" required
+              autocomplete="username">
           </div>
 
           <div class="form-group">
             <label class="form-label" for="login-password">Kata Sandi (Password)</label>
-            <input type="password" class="form-control" id="login-password" placeholder="••••••••" required autocomplete="current-password">
+            <input type="password" class="form-control" id="login-password" placeholder="••••••••" required
+              autocomplete="current-password">
           </div>
 
           <div id="login-alert" class="alert" style="display: none;"></div>
@@ -83,21 +90,26 @@
         </form>
 
         <div style="margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid var(--border-color);">
-          <div style="font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--text-dim); margin-bottom: 8px;">
-            ⚡ Klik Cepat Akun Sintetis:
+          <div
+            style="font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--text-dim); margin-bottom: 8px;">
+            Klik Cepat Akun Sintetis:
           </div>
           <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
-            <button type="button" class="btn btn-secondary btn-sm" onclick="quickFillLogin('mhs_dimas', 'MhsPassword2024!')">
-              👨‍🎓 Mahasiswa (Dimas)
+            <button type="button" class="btn btn-secondary btn-sm"
+              onclick="quickFillLogin('mhs_dimas', 'MhsPassword2024!')">
+              Mahasiswa (Dimas)
             </button>
-            <button type="button" class="btn btn-secondary btn-sm" onclick="quickFillLogin('mhs_sarah', 'MhsPassword2024!')">
-              👩‍🎓 Mahasiswa (Sarah)
+            <button type="button" class="btn btn-secondary btn-sm"
+              onclick="quickFillLogin('mhs_sarah', 'MhsPassword2024!')">
+              Mahasiswa (Sarah)
             </button>
-            <button type="button" class="btn btn-secondary btn-sm" onclick="quickFillLogin('dosen_budi', 'DosenPassword2024!')">
-              👨‍🏫 Dosen (Dr. Budi)
+            <button type="button" class="btn btn-secondary btn-sm"
+              onclick="quickFillLogin('dosen_budi', 'DosenPassword2024!')">
+              Dosen (Dr. Budi)
             </button>
-            <button type="button" class="btn btn-secondary btn-sm" onclick="quickFillLogin('admin_siakad', 'AdminPassword2024!')">
-              ⚙️ Admin Sistem
+            <button type="button" class="btn btn-secondary btn-sm"
+              onclick="quickFillLogin('admin_siakad', 'AdminPassword2024!')">
+              Admin Sistem
             </button>
           </div>
         </div>
@@ -109,16 +121,18 @@
   <div class="modal-overlay" id="modal-security">
     <div class="modal-content" style="max-width: 720px;">
       <div class="modal-header">
-        <div class="modal-title">🛡️ Informasi Kerentanan & Panduan Scan Nuclei</div>
+        <div class="modal-title">Informasi Kerentanan & Panduan Scan Nuclei</div>
         <button class="modal-close">&times;</button>
       </div>
       <div class="modal-body">
         <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1.25rem;">
-          Website ini dirancang khusus untuk praktikum Keamanan Sistem Informasi dengan <strong>2 kerentanan yang sengaja diterapkan</strong> sesuai ketentuan tugas:
+          Website ini dirancang khusus untuk praktikum Keamanan Sistem Informasi dengan <strong>2 kerentanan yang
+            sengaja diterapkan</strong> sesuai ketentuan tugas:
         </p>
 
         <!-- Kerentanan 1 -->
-        <div style="background: rgba(10, 15, 29, 0.6); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 1rem; margin-bottom: 1rem;">
+        <div
+          style="background: rgba(10, 15, 29, 0.6); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 1rem; margin-bottom: 1rem;">
           <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
             <strong style="color: var(--accent-rose); font-size: 0.95rem;">
               1. Percobaan Sandi Tanpa Pembatasan (No Rate Limiting / Brute Force)
@@ -127,14 +141,17 @@
           </div>
           <p style="font-size: 0.825rem; color: var(--text-muted);">
             <strong>Endpoint:</strong> <code>POST /api/login</code><br>
-            <strong>Cacat Keamanan:</strong> Server tidak menerapkan mekanisme pembatasan frekuensi percobaan login (rate limiting), delay respon, CAPTCHA, maupun lockout akun setelah gagal berturut-turut. Penyerang dapat melakukan fuzzing/brute-force tanpa batas.
+            <strong>Cacat Keamanan:</strong> Server tidak menerapkan mekanisme pembatasan frekuensi percobaan login
+            (rate limiting), delay respon, CAPTCHA, maupun lockout akun setelah gagal berturut-turut. Penyerang dapat
+            melakukan fuzzing/brute-force tanpa batas.
           </p>
           <div style="font-size: 0.75rem; color: var(--text-dim); margin-top: 6px;">Perintah Scan Nuclei Template:</div>
           <div class="code-box">nuclei -u http://localhost:3000 -t nuclei-templates/no-rate-limit-login.yaml</div>
         </div>
 
         <!-- Kerentanan 2 -->
-        <div style="background: rgba(10, 15, 29, 0.6); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 1rem; margin-bottom: 1rem;">
+        <div
+          style="background: rgba(10, 15, 29, 0.6); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 1rem; margin-bottom: 1rem;">
           <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
             <strong style="color: var(--accent-amber); font-size: 0.95rem;">
               2. Validasi Berkas Lemah (Unrestricted File Upload)
@@ -143,7 +160,9 @@
           </div>
           <p style="font-size: 0.825rem; color: var(--text-muted);">
             <strong>Endpoint:</strong> <code>POST /api/assignments/upload</code><br>
-            <strong>Cacat Keamanan:</strong> Fitur pengumpulan tugas mahasiswa tidak memvalidasi ekstensi file yang diizinkan (whitelist) maupun inspeksi MIME type. File berbahaya seperti script atau webshell (.php, .html, .svg, dll.) dapat tersimpan dan langsung diakses melalui URL publik <code>/uploads/&lt;filename&gt;</code>.
+            <strong>Cacat Keamanan:</strong> Fitur pengumpulan tugas mahasiswa tidak memvalidasi ekstensi file yang
+            diizinkan (whitelist) maupun inspeksi MIME type. File berbahaya seperti script atau webshell (.php, .html,
+            .svg, dll.) dapat tersimpan dan langsung diakses melalui URL publik <code>/uploads/&lt;filename&gt;</code>.
           </p>
           <div style="font-size: 0.75rem; color: var(--text-dim); margin-top: 6px;">Perintah Scan Nuclei Template:</div>
           <div class="code-box">nuclei -u http://localhost:3000 -t nuclei-templates/weak-file-upload.yaml</div>
@@ -153,7 +172,8 @@
         <div class="alert alert-info" style="font-size: 0.8rem;">
           <div>
             <strong>Perintah Menjalankan Seluruh Scan Nuclei:</strong>
-            <div class="code-box" style="margin-top: 6px; color: #ffffff;">nuclei -u http://localhost:3000 -t nuclei-templates/</div>
+            <div class="code-box" style="margin-top: 6px; color: #ffffff;">nuclei -u http://localhost:3000 -t
+              nuclei-templates/</div>
           </div>
         </div>
       </div>
@@ -167,7 +187,7 @@
   <div class="modal-overlay" id="modal-add-user">
     <div class="modal-content">
       <div class="modal-header">
-        <div class="modal-title">➕ Tambah Akun Kampus Sintetis</div>
+        <div class="modal-title">Tambah Akun Kampus Sintetis</div>
         <button class="modal-close">&times;</button>
       </div>
       <div class="modal-body">
@@ -224,19 +244,21 @@
   <div class="modal-overlay" id="modal-new-thread">
     <div class="modal-content">
       <div class="modal-header">
-        <div class="modal-title">💬 Buat Topik Diskusi Baru</div>
+        <div class="modal-title">Buat Topik Diskusi Baru</div>
         <button class="modal-close">&times;</button>
       </div>
       <div class="modal-body">
         <form id="form-new-thread">
           <div class="form-group">
             <label class="form-label">Judul Diskusi</label>
-            <input type="text" class="form-control" id="thread-title" placeholder="Contoh: Diskusi materi pertemuan 5 KSI" required>
+            <input type="text" class="form-control" id="thread-title"
+              placeholder="Contoh: Diskusi materi pertemuan 5 KSI" required>
           </div>
 
           <div class="form-group">
             <label class="form-label">Isi Pertanyaan / Pesan</label>
-            <textarea class="form-control" id="thread-content" placeholder="Tuliskan pertanyaan atau materi yang ingin didiskusikan..." required></textarea>
+            <textarea class="form-control" id="thread-content"
+              placeholder="Tuliskan pertanyaan atau materi yang ingin didiskusikan..." required></textarea>
           </div>
 
           <div class="modal-footer" style="padding: 1rem 0 0 0;">
@@ -250,4 +272,5 @@
 
   <script src="/js/app.js"></script>
 </body>
+
 </html>

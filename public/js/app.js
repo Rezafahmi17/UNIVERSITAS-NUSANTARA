@@ -186,7 +186,7 @@ function renderGuestView(container) {
   container.innerHTML = `
     <div class="hero-banner">
       <div>
-        <span class="badge badge-vuln" style="margin-bottom: 8px;">Portal Kampus Fiktif - Praktikum Keamanan Sistem Informasi</span>
+        <span class="badge badge-vuln" style="margin-bottom: 8px;">Portal Kampus - Praktikum Keamanan Sistem Informasi</span>
         <h2 style="font-size: 1.8rem; margin: 8px 0; color: #ffffff;">Selamat Datang di Cyber Campus Universitas Nusantara</h2>
         <p style="color: var(--text-muted); max-width: 650px;">
           Portal akademik latihan untuk pengujian keamanan sistem informasi. Sistem ini dilengkapi fitur lengkap untuk Mahasiswa, Dosen, dan Admin dengan <strong>2 kerentanan yang sengaja dibuat</strong> untuk evaluasi audit menggunakan scanner seperti Nuclei.
@@ -194,7 +194,7 @@ function renderGuestView(container) {
       </div>
       <div>
         <button class="btn btn-primary" onclick="openModal('modal-login')">
-          <span>Masuk ke Portal</span> ➔
+          <span>Masuk ke Portal</span>
         </button>
       </div>
     </div>
@@ -203,7 +203,7 @@ function renderGuestView(container) {
     <div class="card">
       <div class="card-header">
         <div>
-          <div class="card-title">🔐 Akun Sintetis untuk Latihan</div>
+          <div class="card-title">Akun Sintetis untuk Latihan</div>
           <div class="card-desc">Klik salah satu kartu di bawah ini untuk langsung mengisi dan login secara instan:</div>
         </div>
       </div>
@@ -238,7 +238,7 @@ function renderGuestView(container) {
     <div class="card" style="border-left: 4px solid var(--accent-rose);">
       <div class="card-header">
         <div class="card-title" style="color: var(--accent-rose);">
-          🛡️ Kerentanan Sengaja yang Diterapkan (Target Scan Nuclei)
+          Kerentanan Sengaja yang Diterapkan (Target Scan Nuclei)
         </div>
       </div>
       <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem;">
@@ -294,9 +294,9 @@ async function renderMahasiswaView(container) {
           <h2>${currentUser.name}</h2>
           <div class="user-subtext">
             <span>NIM: <strong>${currentUser.nim}</strong></span>
-            <span>•</span>
+            <span>-</span>
             <span>Program Studi: <strong>${currentUser.prodi}</strong></span>
-            <span>•</span>
+            <span>-</span>
             <span>Semester: <strong>${currentUser.semester}</strong></span>
           </div>
         </div>
@@ -320,13 +320,13 @@ async function renderMahasiswaView(container) {
     <!-- Navigation Tabs -->
     <div class="nav-tabs">
       <button class="nav-tab-btn ${activeTab === 'grades' || activeTab === 'dashboard' ? 'active' : ''}" onclick="switchTab('grades')">
-        📊 Transkrip & Nilai
+        Transkrip & Nilai
       </button>
       <button class="nav-tab-btn ${activeTab === 'upload' ? 'active' : ''}" onclick="switchTab('upload')">
-        📤 Unggah Tugas Kuliah
+        Unggah Tugas Kuliah
       </button>
       <button class="nav-tab-btn ${activeTab === 'forum' ? 'active' : ''}" onclick="switchTab('forum')">
-        💬 Forum Diskusi Kampus
+        Forum Diskusi Kampus
       </button>
     </div>
 
@@ -345,11 +345,11 @@ function renderMahasiswaTab(tab, data) {
       <div class="card">
         <div class="card-header">
           <div>
-            <div class="card-title">📤 Unggah Berkas Tugas Mahasiswa</div>
+            <div class="card-title">Unggah Berkas Tugas Mahasiswa</div>
             <div class="card-desc">Pilih tugas praktikum dan unggah dokumen Anda.</div>
           </div>
           <span class="badge badge-vuln" title="Endpoint ini sengaja tidak memvalidasi ekstensi berkas">
-            ⚠️ Kerentanan: Validasi Berkas Lemah
+            Kerentanan: Validasi Berkas Lemah
           </span>
         </div>
 
@@ -370,7 +370,6 @@ function renderMahasiswaTab(tab, data) {
           <div class="form-group">
             <label class="form-label">Pilih Berkas Tugas (Mendukung segala format)</label>
             <div class="dropzone" id="dropzone-box">
-              <div class="dropzone-icon">📁</div>
               <div style="font-weight: 600; margin-bottom: 4px;" id="dropzone-text">Klik atau tarik berkas ke sini untuk mengunggah</div>
               <div style="font-size: 0.75rem; color: var(--text-dim);">Format diterima: .pdf, .docx, .zip, .html, .sh, .txt, dll.</div>
               <input type="file" id="upload-file-input" name="file" required>
@@ -380,7 +379,7 @@ function renderMahasiswaTab(tab, data) {
           <div id="upload-alert" style="display: none;"></div>
 
           <button type="submit" class="btn btn-primary" id="btn-submit-upload" style="width: 100%;">
-            <span>Unggah Berkas Sekarang</span> 🚀
+            <span>Unggah Berkas Sekarang</span>
           </button>
         </form>
       </div>
@@ -388,7 +387,7 @@ function renderMahasiswaTab(tab, data) {
       <!-- Riwayat Pengumpulan -->
       <div class="card">
         <div class="card-header">
-          <div class="card-title">📋 Riwayat Tugas yang Telah Diunggah</div>
+          <div class="card-title">Riwayat Tugas yang Telah Diunggah</div>
         </div>
         <div class="table-wrapper">
           <table>
@@ -418,7 +417,7 @@ function renderMahasiswaTab(tab, data) {
                   <td><strong>${s.score !== null ? s.score : '-'}</strong></td>
                   <td>
                     <a href="${s.fileUrl}" target="_blank" class="btn btn-secondary btn-sm">
-                      Unduh / Lihat Berkas ↗
+                      Unduh / Lihat Berkas
                     </a>
                   </td>
                 </tr>
@@ -439,7 +438,7 @@ function renderMahasiswaTab(tab, data) {
     <div class="card">
       <div class="card-header">
         <div>
-          <div class="card-title">📊 Kartu Hasil Studi & Nilai Akademik</div>
+          <div class="card-title">Kartu Hasil Studi & Nilai Akademik</div>
           <div class="card-desc">Daftar mata kuliah dan perolehan nilai semester aktif.</div>
         </div>
       </div>
@@ -550,7 +549,7 @@ function attachMahasiswaTabHandlers() {
         alertBox.style.display = 'block';
       } finally {
         submitBtn.disabled = false;
-        submitBtn.innerHTML = '<span>Unggah Berkas Sekarang</span> 🚀';
+        submitBtn.innerHTML = '<span>Unggah Berkas Sekarang</span>';
       }
     });
   }
@@ -584,7 +583,7 @@ async function renderDosenView(container) {
           <h2>${currentUser.name}</h2>
           <div class="user-subtext">
             <span>NIDN: <strong>${currentUser.nidn || '0412088501'}</strong></span>
-            <span>•</span>
+            <span>-</span>
             <span>Program Studi: <strong>${currentUser.prodi || 'Teknik Informatika'}</strong></span>
           </div>
         </div>
@@ -604,13 +603,13 @@ async function renderDosenView(container) {
     <!-- Navigation Tabs Dosen -->
     <div class="nav-tabs">
       <button class="nav-tab-btn ${activeTab === 'grading' || activeTab === 'dashboard' ? 'active' : ''}" onclick="switchTab('grading')">
-        ✍️ Beri & Kelola Nilai
+        Beri & Kelola Nilai
       </button>
       <button class="nav-tab-btn ${activeTab === 'submissions' ? 'active' : ''}" onclick="switchTab('submissions')">
-        📁 Pengumpulan Tugas Mahasiswa
+        Pengumpulan Tugas Mahasiswa
       </button>
       <button class="nav-tab-btn ${activeTab === 'forum' ? 'active' : ''}" onclick="switchTab('forum')">
-        💬 Forum Diskusi Dosen
+        Forum Diskusi Dosen
       </button>
     </div>
 
@@ -628,7 +627,7 @@ function renderDosenTab(tab, data) {
       <div class="card">
         <div class="card-header">
           <div>
-            <div class="card-title">📁 Berkas Tugas yang Dikumpulkan Mahasiswa</div>
+            <div class="card-title">Berkas Tugas yang Dikumpulkan Mahasiswa</div>
             <div class="card-desc">Tinjau dan periksa berkas tugas yang diunggah oleh mahasiswa.</div>
           </div>
         </div>
@@ -663,7 +662,7 @@ function renderDosenTab(tab, data) {
                   </td>
                   <td>
                     <a href="${s.fileUrl}" target="_blank" class="btn btn-secondary btn-sm" style="margin-right: 6px;">
-                      Unduh ↗
+                      Unduh
                     </a>
                     <button class="btn btn-primary btn-sm" onclick="openGradeModalForSub('${s.id}', '${s.studentId}', '${s.studentName}', '${s.assignmentTitle}', '${s.score || ''}')">
                       Beri Nilai
@@ -688,7 +687,7 @@ function renderDosenTab(tab, data) {
       <!-- Form Input Nilai -->
       <div class="card">
         <div class="card-header">
-          <div class="card-title">✍️ Form Input Nilai</div>
+          <div class="card-title">Form Input Nilai</div>
         </div>
 
         <form id="form-grade-student">
@@ -722,7 +721,7 @@ function renderDosenTab(tab, data) {
           <div id="grade-alert" style="display: none;"></div>
 
           <button type="submit" class="btn btn-primary" style="width: 100%;">
-            Simpan Nilai Mahasiswa 💾
+            Simpan Nilai Mahasiswa
           </button>
         </form>
       </div>
@@ -730,7 +729,7 @@ function renderDosenTab(tab, data) {
       <!-- Rekap Nilai -->
       <div class="card">
         <div class="card-header">
-          <div class="card-title">📑 Rekapitulasi Nilai Seluruh Mahasiswa</div>
+          <div class="card-title">Rekapitulasi Nilai Seluruh Mahasiswa</div>
         </div>
 
         <div class="table-wrapper">
@@ -855,13 +854,13 @@ async function renderAdminView(container) {
     <div class="hero-banner">
       <div class="user-profile-header">
         <div class="avatar-large" style="background: linear-gradient(135deg, #d97706, #f59e0b);">
-          ⚙️
+          ADM
         </div>
         <div class="user-meta">
           <h2>${currentUser.name}</h2>
           <div class="user-subtext">
             <span>Role: <strong>Sistem Administrator</strong></span>
-            <span>•</span>
+            <span>-</span>
             <span>Status: <strong>Aktif</strong></span>
           </div>
         </div>
@@ -882,15 +881,15 @@ async function renderAdminView(container) {
     <div class="card">
       <div class="card-header">
         <div>
-          <div class="card-title">👥 Kelola Akun Kampus Sintetis</div>
+          <div class="card-title">Kelola Akun Kampus Sintetis</div>
           <div class="card-desc">Tambah, edit, dan hapus akun mahasiswa, dosen, maupun admin.</div>
         </div>
         <div style="display: flex; gap: 8px;">
           <button class="btn btn-secondary btn-sm" onclick="resetDatabase()">
-            🔄 Reset Data Sintetis
+            Reset Data Sintetis
           </button>
           <button class="btn btn-primary btn-sm" onclick="openModal('modal-add-user')">
-            ➕ Tambah Akun Baru
+            Tambah Akun Baru
           </button>
         </div>
       </div>
@@ -1004,11 +1003,11 @@ function renderForumComponent() {
     <div class="card">
       <div class="card-header">
         <div>
-          <div class="card-title">💬 Forum Diskusi Akademik Kampus</div>
+          <div class="card-title">Forum Diskusi Akademik Kampus</div>
           <div class="card-desc">Ruang tanya jawab dan diskusi antara mahasiswa dan dosen.</div>
         </div>
         <button class="btn btn-primary btn-sm" onclick="openModal('modal-new-thread')">
-          ➕ Buat Topik Baru
+          Buat Topik Baru
         </button>
       </div>
 
@@ -1038,11 +1037,11 @@ async function loadForumThreads() {
         <div class="thread-body">${t.content}</div>
         <div class="thread-meta">
           <span>Oleh: <strong>${t.authorName}</strong></span>
-          <span>•</span>
+          <span>-</span>
           <span class="badge badge-${t.authorRole}">${t.authorRole.toUpperCase()}</span>
-          <span>•</span>
+          <span>-</span>
           <span>${new Date(t.createdAt).toLocaleString('id-ID')}</span>
-          <span>•</span>
+          <span>-</span>
           <span>${t.replies ? t.replies.length : 0} Balasan</span>
         </div>
 
