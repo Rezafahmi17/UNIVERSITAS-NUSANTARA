@@ -1,6 +1,6 @@
 # Portal Kampus - Praktikum Keamanan Sistem Informasi
 
-Aplikasi web portal kampus sederhana berbasis **JavaScript (Node.js & Express)** yang dibangun untuk memenuhi tugas praktikum Keamanan Sistem Informasi.
+Aplikasi web portal kampus berbasis **JavaScript (Node.js & Express)**.
 
 
 ## 👥 Fitur & Peran Pengguna (Role Sesuai Ketentuan)
