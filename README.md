@@ -5,7 +5,6 @@ Aplikasi web portal kampus sederhana berbasis **JavaScript (Node.js & Express)**
 
 ## 👥 Fitur & Peran Pengguna (Role Sesuai Ketentuan)
 
-Seluruh akun dan data bersifat sintetis dan berbeda satu sama lain:
 
 | Role | Username | Password | Keterangan & Hak Akses |
 | :--- | :--- | :--- | :--- |
