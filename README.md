@@ -14,10 +14,9 @@ Seluruh akun dan data bersifat sintetis dan berbeda satu sama lain:
 
 | Role | Username | Password | Keterangan & Hak Akses |
 | :--- | :--- | :--- | :--- |
-| **Mahasiswa 1** | `mhs_dimas` | `MhsPassword2024!` | Dimas Pratama (NIM: 220101089). Bisa login, melihat nilai, mengunggah berkas tugas praktikum, dan berdiskusi di forum. |
-| **Mahasiswa 2** | `mhs_sarah` | `MhsPassword2024!` | Sarah Nur Aini (NIM: 220101142). Bisa login, melihat nilai, mengunggah tugas, dan berdiskusi. |
-| **Dosen** | `dosen_budi` | `DosenPassword2024!` | Dr. Budi Santoso, M.Kom. (NIDN: 0412088501). Bisa login, memberi & mengedit nilai mahasiswa, melihat tugas terunggah, serta berdiskusi di forum. |
-| **Admin** | `admin_siakad` | `AdminPassword2024!` | Administrator Akademik. Mengelola seluruh akun (tambah, edit, hapus akun mahasiswa & dosen) dan mereset database sintetis. |
+| **Admin** | `admin_siakad` | `AdminPassword2024!` | Administrator Akademik. Mengelola akun pengguna (menambah, mengubah, dan menghapus akun mahasiswa & dosen dengan pilihan Program Studi bebas). |
+
+> Akun Mahasiswa dan Dosen dapat didaftarkan secara mandiri melalui Panel Administrator sesuai kebutuhan tim penguji.
 
 ---
 
