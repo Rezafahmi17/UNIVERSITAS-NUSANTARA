@@ -199,52 +199,5 @@
       "notes": "Pembahasan lengkap mengenai ketiadaan rate limit."
     }
   ],
-  "forum": [
-    {
-      "id": "thm_01",
-      "title": "Tips Persiapan Scan Kerentanan dengan Nuclei",
-      "content": "Halo rekan-rekan, untuk scanning Nuclei di lab lokal pastikan endpoint port sesuai ya. Apakah ada yang sudah mencoba template custom?",
-      "authorId": "usr_dsn_01",
-      "authorName": "Dr. Budi Santoso, M.Kom.",
-      "authorRole": "dosen",
-      "createdAt": "2026-10-11T09:30:00Z",
-      "replies": [
-        {
-          "id": "rep_01",
-          "authorId": "usr_mhs_01",
-          "authorName": "Dimas Pratama Putra",
-          "authorRole": "mahasiswa",
-          "content": "Sudah Pak, saya sedang menyiapkan template untuk deteksi endpoint login tanpa rate limiting.",
-          "createdAt": "2026-10-11T10:15:00Z"
-        },
-        {
-          "id": "rep_02",
-          "authorId": "usr_mhs_02",
-          "authorName": "Sarah Nur Aini",
-          "authorRole": "mahasiswa",
-          "content": "Saya juga sedang mengecek apakah validasi berkas upload bisa terdeteksi saat file berbahaya diunggah.",
-          "createdAt": "2026-10-11T11:05:00Z"
-        }
-      ]
-    },
-    {
-      "id": "thm_02",
-      "title": "Diskusi Format Pengumpulan Tugas Praktikum 02",
-      "content": "Mohon izin bertanya kepada Bapak Budi, apakah pengumpulan tugas praktikum 2 boleh dalam format arsip .zip atau harus .pdf?",
-      "authorId": "usr_mhs_02",
-      "authorName": "Sarah Nur Aini",
-      "authorRole": "mahasiswa",
-      "createdAt": "2026-10-12T08:00:00Z",
-      "replies": [
-        {
-          "id": "rep_03",
-          "authorId": "usr_dsn_01",
-          "authorName": "Dr. Budi Santoso, M.Kom.",
-          "authorRole": "dosen",
-          "content": "Boleh keduanya Sarah, silakan unggah berkas yang memuat screenshot dan ringkasan audit.",
-          "createdAt": "2026-10-12T08:45:00Z"
-        }
-      ]
-    }
-  ]
+  "forum": []
 }

@@ -100,16 +100,6 @@ function renderLoginView(container) {
             <button type="submit" class="btn btn-primary" style="width:100%;">Masuk</button>
           </form>
 
-          <!-- Bantuan Akun Cepat -->
-          <div class="demo-accounts">
-            <p>Pilihan Akun Uji Coba:</p>
-            <div class="demo-btn-group">
-              <button class="btn btn-secondary btn-sm" onclick="quickLogin('mhs_dimas', 'MhsPassword2024!')">Mahasiswa (Dimas)</button>
-              <button class="btn btn-secondary btn-sm" onclick="quickLogin('mhs_sarah', 'MhsPassword2024!')">Mahasiswa (Sarah)</button>
-              <button class="btn btn-secondary btn-sm" onclick="quickLogin('dosen_budi', 'DosenPassword2024!')">Dosen (Dr. Budi)</button>
-              <button class="btn btn-secondary btn-sm" onclick="quickLogin('admin_siakad', 'AdminPassword2024!')">Administrator</button>
-            </div>
-          </div>
         </div>
       </div>
     </div>
