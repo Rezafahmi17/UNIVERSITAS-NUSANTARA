@@ -1,0 +1,51 @@
+id: weak-file-upload
+
+info:
+  name: Unrestricted File Upload on Campus Portal Assignment Endpoint
+  author: mahasiswa-ksi
+  severity: high
+  description: |
+    Endpoint pengunggahan tugas (/api/assignments/upload) tidak melakukan filter ekstensi file atau validasi tipe konten MIME. Berkas langsung disimpan dan dapat diakses dari direktori publik /uploads/.
+  reference:
+    - https://cwe.mitre.org/data/definitions/434.html
+    - https://owasp.org/www-community/vulnerabilities/Unrestricted_File_Upload
+  tags: upload,file-upload,unrestricted-upload,cwe-434
+
+http:
+  - raw:
+      - |
+        POST /api/assignments/upload HTTP/1.1
+        Host: {{Hostname}}
+        Content-Type: multipart/form-data; boundary=---------------------------974767299852498929531610575
+
+        -----------------------------974767299852498929531610575
+        Content-Disposition: form-data; name="assignmentId"
+
+        asg_01
+        -----------------------------974767299852498929531610575
+        Content-Disposition: form-data; name="studentId"
+
+        usr_mhs_01
+        -----------------------------974767299852498929531610575
+        Content-Disposition: form-data; name="studentName"
+
+        Dimas Pratama Putra
+        -----------------------------974767299852498929531610575
+        Content-Disposition: form-data; name="file"; filename="proof_test_audit.html"
+        Content-Type: text/html
+
+        <!DOCTYPE html><html><body><h1>Audit Proof: Insecure Upload Success</h1></body></html>
+        -----------------------------974767299852498929531610575--
+
+    matchers-condition: and
+    matchers:
+      - type: status
+        status:
+          - 200
+
+      - type: word
+        words:
+          - "Validasi berkas lemah"
+          - "/uploads/"
+        part: body
+        condition: and
