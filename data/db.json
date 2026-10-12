@@ -8,41 +8,6 @@
       "role": "admin",
       "email": "admin@cyberkampus.ac.id",
       "createdAt": "2024-09-01T08:00:00Z"
-    },
-    {
-      "id": "usr_dsn_01",
-      "username": "dosen_budi",
-      "password": "DosenPassword2024!",
-      "name": "Dr. Budi Santoso, M.Kom.",
-      "role": "dosen",
-      "nidn": "0412088501",
-      "email": "budi.santoso@cyberkampus.ac.id",
-      "prodi": "Teknik Informatika",
-      "createdAt": "2024-09-01T08:00:00Z"
-    },
-    {
-      "id": "usr_mhs_01",
-      "username": "mhs_dimas",
-      "password": "MhsPassword2024!",
-      "name": "Dimas Pratama Putra",
-      "role": "mahasiswa",
-      "nim": "220101089",
-      "email": "dimas.pratama@mhs.cyberkampus.ac.id",
-      "semester": 5,
-      "prodi": "Teknik Informatika",
-      "createdAt": "2024-09-01T08:00:00Z"
-    },
-    {
-      "id": "usr_mhs_02",
-      "username": "mhs_sarah",
-      "password": "MhsPassword2024!",
-      "name": "Sarah Nur Aini",
-      "role": "mahasiswa",
-      "nim": "220101142",
-      "email": "sarah.aini@mhs.cyberkampus.ac.id",
-      "semester": 5,
-      "prodi": "Teknik Informatika",
-      "createdAt": "2024-09-01T08:00:00Z"
     }
   ],
   "courses": [

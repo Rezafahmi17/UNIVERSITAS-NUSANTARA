@@ -127,12 +127,12 @@ app.get('/api/courses', (req, res) => {
 app.get('/api/grades', (req, res) => {
   const { studentId } = req.query;
   const db = readDb();
-  
+
   if (studentId) {
     const studentGrades = db.grades.filter(g => g.studentId === studentId);
     return res.json(studentGrades);
   }
-  
+
   res.json(db.grades);
 });
 
@@ -361,9 +361,9 @@ app.post('/api/admin/users', (req, res) => {
     name,
     role,
     email: email || `${username}@cyberkampus.ac.id`,
-    nim: role === 'mahasiswa' ? (nim || '220101999') : undefined,
-    nidn: role === 'dosen' ? (nidn || '0400000001') : undefined,
-    prodi: prodi || 'Teknik Informatika',
+    nim: role === 'mahasiswa' ? (nim || '-') : undefined,
+    nidn: role === 'dosen' ? (nidn || '-') : undefined,
+    prodi: prodi ? prodi.trim() : '-',
     semester: role === 'mahasiswa' ? (parseInt(semester) || 1) : undefined,
     createdAt: new Date().toISOString()
   };

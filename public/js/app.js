@@ -1,10 +1,28 @@
 let currentUser = null;
 let activeTab = 'grades';
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
   const saved = localStorage.getItem('siakad_user');
   if (saved) {
-    try { currentUser = JSON.parse(saved); } catch(e) { currentUser = null; }
+    try {
+      currentUser = JSON.parse(saved);
+      // Validasi apakah akun pengguna masih ada di database
+      const res = await fetch('/api/admin/users');
+      if (res.ok) {
+        const users = await res.json();
+        const found = users.find(u => u.username === currentUser.username);
+        if (found) {
+          currentUser = found;
+          localStorage.setItem('siakad_user', JSON.stringify(found));
+        } else if (currentUser.username !== 'admin_siakad') {
+          // Akun lama telah dihapus dari database, auto-logout agar sesi bersih
+          currentUser = null;
+          localStorage.removeItem('siakad_user');
+        }
+      }
+    } catch(e) {
+      // Abaikan jika server belum siap
+    }
   }
   render();
 });
@@ -155,7 +173,7 @@ async function renderMahasiswaView(container) {
   container.innerHTML = `
     <div class="card" style="background:#eff6ff; border-color:#bfdbfe;">
       <h2 style="font-size:1.1rem; color:#1e3a8a;">Selamat Datang, ${currentUser.name}</h2>
-      <p style="font-size:0.85rem; color:#475569;">NIM: ${currentUser.nim} | Program Studi: ${currentUser.prodi} | Semester: ${currentUser.semester}</p>
+      <p style="font-size:0.85rem; color:#475569;">NIM: ${currentUser.nim || '-'} | Program Studi: ${currentUser.prodi || '-'} | Semester: ${currentUser.semester || 1}</p>
     </div>
 
     <div class="tabs">
@@ -319,20 +337,22 @@ function attachUploadForm() {
 // VIEW: DOSEN
 // ----------------------------------------------------
 async function renderDosenView(container) {
-  const [subsRes, usersRes, gradesRes] = await Promise.all([
+  const [subsRes, usersRes, gradesRes, coursesRes] = await Promise.all([
     fetch('/api/submissions'),
     fetch('/api/admin/users'),
-    fetch('/api/grades')
+    fetch('/api/grades'),
+    fetch('/api/courses')
   ]);
   const submissions = await subsRes.json();
   const allUsers = await usersRes.json();
   const grades = await gradesRes.json();
+  const courses = await coursesRes.json();
   const students = allUsers.filter(u => u.role === 'mahasiswa');
 
   container.innerHTML = `
     <div class="card" style="background:#eff6ff; border-color:#bfdbfe;">
       <h2 style="font-size:1.1rem; color:#1e3a8a;">Selamat Datang, ${currentUser.name}</h2>
-      <p style="font-size:0.85rem; color:#475569;">NIDN: ${currentUser.nidn || '-'} | Program Studi: ${currentUser.prodi || 'Teknik Informatika'}</p>
+      <p style="font-size:0.85rem; color:#475569;">NIDN: ${currentUser.nidn || '-'} | Program Studi: ${currentUser.prodi || '-'}</p>
     </div>
 
     <div class="tabs">
@@ -344,7 +364,7 @@ async function renderDosenView(container) {
     <div id="tab-body">
       ${activeTab === 'submissions' ? renderDosenSubmissions(submissions) :
         activeTab === 'forum' ? renderForumTab() :
-        renderDosenGrades(students, grades)}
+        renderDosenGrades(students, grades, courses)}
     </div>
   `;
 
@@ -352,7 +372,7 @@ async function renderDosenView(container) {
   if (activeTab === 'forum') loadForum();
 }
 
-function renderDosenGrades(students, grades) {
+function renderDosenGrades(students, grades, courses) {
   return `
     <div class="card">
       <div class="card-title">Form Penilaian Mahasiswa</div>
@@ -360,15 +380,18 @@ function renderDosenGrades(students, grades) {
         <div class="form-group">
           <label class="form-label">Pilih Mahasiswa</label>
           <select class="form-control" id="dosen-student-id" required>
-            ${students.map(s => `<option value="${s.id}">${s.name} (${s.nim})</option>`).join('')}
+            ${students.length === 0 ? '<option value="">(Belum ada mahasiswa terdaftar)</option>' :
+              students.map(s => `<option value="${s.id}">${s.name} (${s.nim || '-'}) - ${s.prodi || '-'}</option>`).join('')}
           </select>
         </div>
 
         <div class="form-group">
           <label class="form-label">Mata Kuliah</label>
           <select class="form-control" id="dosen-course-code" required>
-            <option value="KSI-501">KSI-501: Keamanan Sistem Informasi</option>
-            <option value="KRP-502">KRP-502: Kriptografi Terapan</option>
+            ${(courses && courses.length ? courses : [
+              { code: 'KSI-501', name: 'Keamanan Sistem Informasi' },
+              { code: 'KRP-502', name: 'Kriptografi Terapan' }
+            ]).map(c => `<option value="${c.code}" data-name="${c.name}">${c.code}: ${c.name}</option>`).join('')}
           </select>
         </div>
 
@@ -382,7 +405,7 @@ function renderDosenGrades(students, grades) {
           <input type="text" class="form-control" id="dosen-notes" placeholder="Catatan untuk mahasiswa">
         </div>
 
-        <button type="submit" class="btn btn-primary">Simpan Nilai</button>
+        <button type="submit" class="btn btn-primary" ${students.length === 0 ? 'disabled' : ''}>Simpan Nilai</button>
       </form>
     </div>
 
@@ -424,7 +447,13 @@ function attachDosenGradeForm() {
   form.onsubmit = async (e) => {
     e.preventDefault();
     const studentId = document.getElementById('dosen-student-id').value;
-    const courseCode = document.getElementById('dosen-course-code').value;
+    if (!studentId) {
+      alert('Silakan daftarkan dan pilih mahasiswa terlebih dahulu.');
+      return;
+    }
+    const courseSelect = document.getElementById('dosen-course-code');
+    const courseCode = courseSelect.value;
+    const courseName = courseSelect.options[courseSelect.selectedIndex]?.getAttribute('data-name') || 'Mata Kuliah';
     const score = document.getElementById('dosen-score').value;
     const feedback = document.getElementById('dosen-notes').value;
 
@@ -434,7 +463,7 @@ function attachDosenGradeForm() {
       body: JSON.stringify({
         studentId,
         courseCode,
-        courseName: courseCode === 'KSI-501' ? 'Keamanan Sistem Informasi' : 'Kriptografi Terapan',
+        courseName,
         score,
         feedback,
         lecturerId: currentUser.id
@@ -500,9 +529,9 @@ async function renderAdminView(container) {
 
     <div class="card">
       <div class="card-title">Tambah Akun Baru</div>
-      <form id="form-add-user" style="display:grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap:10px;">
+      <form id="form-add-user" style="display:grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap:10px;">
         <div>
-          <label class="form-label">Role</label>
+          <label class="form-label">Peran (Role)</label>
           <select class="form-control" id="adm-role" required>
             <option value="mahasiswa">Mahasiswa</option>
             <option value="dosen">Dosen</option>
@@ -511,19 +540,27 @@ async function renderAdminView(container) {
         </div>
         <div>
           <label class="form-label">Nama Lengkap</label>
-          <input type="text" class="form-control" id="adm-name" required>
+          <input type="text" class="form-control" id="adm-name" placeholder="Nama Lengkap" required>
         </div>
         <div>
           <label class="form-label">Username</label>
-          <input type="text" class="form-control" id="adm-user" required>
+          <input type="text" class="form-control" id="adm-user" placeholder="Username" required>
         </div>
         <div>
           <label class="form-label">Password</label>
-          <input type="text" class="form-control" id="adm-pass" required>
+          <input type="text" class="form-control" id="adm-pass" placeholder="Password" required>
         </div>
         <div>
           <label class="form-label">NIM / NIDN</label>
-          <input type="text" class="form-control" id="adm-id">
+          <input type="text" class="form-control" id="adm-id" placeholder="Nomor Induk">
+        </div>
+        <div>
+          <label class="form-label">Program Studi</label>
+          <input type="text" class="form-control" id="adm-prodi" placeholder="Contoh: Sistem Informasi / Teknik Elektro / dll">
+        </div>
+        <div>
+          <label class="form-label">Semester (Mahasiswa)</label>
+          <input type="number" class="form-control" id="adm-sem" min="1" max="14" value="1">
         </div>
         <div style="display:flex; align-items:flex-end;">
           <button type="submit" class="btn btn-primary" style="width:100%;">Tambah Akun</button>
@@ -541,6 +578,7 @@ async function renderAdminView(container) {
               <th>Nama</th>
               <th>Username</th>
               <th>Identitas</th>
+              <th>Program Studi</th>
               <th>Aksi</th>
             </tr>
           </thead>
@@ -551,6 +589,7 @@ async function renderAdminView(container) {
                 <td>${u.name}</td>
                 <td>${u.username}</td>
                 <td>${u.nim ? 'NIM: ' + u.nim : (u.nidn ? 'NIDN: ' + u.nidn : '-')}</td>
+                <td>${u.prodi || '-'}</td>
                 <td>
                   ${u.username === 'admin_siakad' ? '-' : `
                     <button class="btn btn-danger btn-sm" onclick="deleteUser('${u.id}')">Hapus</button>
@@ -571,9 +610,14 @@ async function renderAdminView(container) {
     const username = document.getElementById('adm-user').value.trim();
     const password = document.getElementById('adm-pass').value;
     const idVal = document.getElementById('adm-id').value.trim();
+    const prodi = document.getElementById('adm-prodi').value.trim() || '-';
+    const semester = document.getElementById('adm-sem').value;
 
-    const payload = { role, name, username, password };
-    if (role === 'mahasiswa') payload.nim = idVal;
+    const payload = { role, name, username, password, prodi };
+    if (role === 'mahasiswa') {
+      payload.nim = idVal;
+      payload.semester = parseInt(semester) || 1;
+    }
     if (role === 'dosen') payload.nidn = idVal;
 
     const res = await fetch('/api/admin/users', {
