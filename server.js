@@ -2,16 +2,22 @@ const express = require('express');
 const cors = require('cors');
 const path = require('path');
 const fs = require('fs');
+const os = require('os');
 const multer = require('multer');
 const { readDb, writeDb, resetDb } = require('./data/db');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Pastikan direktori uploads tersedia
-const UPLOAD_DIR = path.join(__dirname, 'uploads');
-if (!fs.existsSync(UPLOAD_DIR)) {
-  fs.mkdirSync(UPLOAD_DIR, { recursive: true });
+// Pastikan direktori uploads tersedia (gunakan /tmp jika di lingkungan serverless Netlify)
+const isServerless = Boolean(process.env.NETLIFY || process.env.AWS_LAMBDA_FUNCTION_NAME || process.env.LAMBDA_TASK_ROOT);
+const UPLOAD_DIR = isServerless ? path.join(os.tmpdir(), 'uploads') : path.join(__dirname, 'uploads');
+try {
+  if (!fs.existsSync(UPLOAD_DIR)) {
+    fs.mkdirSync(UPLOAD_DIR, { recursive: true });
+  }
+} catch (err) {
+  console.warn("Peringatan inisialisasi folder upload:", err.message);
 }
 
 
@@ -431,13 +437,18 @@ app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
-app.listen(PORT, () => {
-  console.log(`=======================================================`);
-  console.log(`  PORTAL KAMPUS FIKTIF - PRAKTIKUM KEAMANAN SISTEM INFORMASI`);
-  console.log(`=======================================================`);
-  console.log(`  Server aktif di : http://localhost:${PORT}`);
-  console.log(`  Kerentanan 1    : Percobaan Sandi Tanpa Pembatasan (POST /api/login)`);
-  console.log(`  Kerentanan 2    : Validasi Berkas Lemah (POST /api/assignments/upload)`);
-  console.log(`  Upload Folder   : ${UPLOAD_DIR}`);
-  console.log(`=======================================================`);
-});
+if (require.main === module && !process.env.NETLIFY) {
+  app.listen(PORT, () => {
+    console.log(`=======================================================`);
+    console.log(`  PORTAL KAMPUS FIKTIF - PRAKTIKUM KEAMANAN SISTEM INFORMASI`);
+    console.log(`=======================================================`);
+    console.log(`  Server aktif di : http://localhost:${PORT}`);
+    console.log(`  Kerentanan 1    : Percobaan Sandi Tanpa Pembatasan (POST /api/login)`);
+    console.log(`  Kerentanan 2    : Validasi Berkas Lemah (POST /api/assignments/upload)`);
+    console.log(`  Upload Folder   : ${UPLOAD_DIR}`);
+    console.log(`=======================================================`);
+  });
+}
+
+module.exports = app;
+

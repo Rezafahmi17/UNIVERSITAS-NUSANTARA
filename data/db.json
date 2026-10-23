@@ -8,6 +8,29 @@
       "role": "admin",
       "email": "admin@cyberkampus.ac.id",
       "createdAt": "2024-09-01T08:00:00Z"
+    },
+    {
+      "id": "usr_dsn_01",
+      "username": "dsn_budi",
+      "password": "DosenPassword2024!",
+      "name": "Dr. Budi Santoso, M.Kom.",
+      "role": "dosen",
+      "nidn": "0412058001",
+      "prodi": "Teknik Informatika",
+      "email": "budi.santoso@cyberkampus.ac.id",
+      "createdAt": "2024-09-01T08:00:00Z"
+    },
+    {
+      "id": "usr_mhs_01",
+      "username": "mhs_dimas",
+      "password": "MhsPassword2024!",
+      "name": "Dimas Arya Pratama",
+      "role": "mahasiswa",
+      "nim": "220101001",
+      "prodi": "Teknik Informatika",
+      "semester": 5,
+      "email": "dimas.arya@student.cyberkampus.ac.id",
+      "createdAt": "2024-09-01T08:00:00Z"
     }
   ],
   "courses": [
@@ -40,7 +63,22 @@
       "lecturerName": "Siti Rahma, M.Kom."
     }
   ],
-  "grades": [],
+  "grades": [
+    {
+      "id": "grd_01",
+      "studentId": "usr_mhs_01",
+      "studentName": "Dimas Arya Pratama",
+      "nim": "220101001",
+      "courseCode": "KSI-501",
+      "courseName": "Keamanan Sistem Informasi",
+      "sks": 3,
+      "lecturerId": "usr_dsn_01",
+      "score": 88,
+      "gradeLetter": "A",
+      "gradePoint": 4.0,
+      "feedback": "Hasil simulasi pengujian dan analisis keamanan sangat memuaskan."
+    }
+  ],
   "assignments": [
     {
       "id": "asg_01",
